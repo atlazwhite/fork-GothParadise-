@@ -2,6 +2,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 from PIL import Image, ImageTk, ImageDraw
 from tkinter import messagebox
+import platform
 
 def togli_sfondo(img):
     img = img.convert("RGBA")
@@ -14,9 +15,12 @@ root = tk.Tk()
 root.title("GothParadise Shop")
 root.geometry("600x950")
 root.configure(bg="#280137")
-root.state("zoomed")
 
-root.state("zoomed")
+if platform.system() == "Linux":
+    root.attributes("-zoomed")
+else:
+    root.state("zoomed")
+
 root.update()
 larghezza = root.winfo_width()
 altezza = root.winfo_height()
@@ -64,7 +68,12 @@ for p in products:
 
 def apri_checkout():
     finestra = tk.Toplevel(root)
-    finestra.state("zoomed")
+
+    if platform.system() == "Linux":
+        finestra.attributes("-zoomed")
+    else:
+        finestra.state("zoomed")
+
     finestra.title("Checkout")
     finestra.geometry("600x950")
     finestra.configure(bg="#280137")
